@@ -1,0 +1,19 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+header{
+  background: black;
+  color: red;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.movieDescription{
+  margin-bottom: 10px;
+}
