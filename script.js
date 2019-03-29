@@ -10,8 +10,8 @@ function enterSearch(e) {                                //la funzione passa la 
 function deleteOldResults() {                            //funz. che elimina i risultati delle ricerche precedenti
 
   console.log("deleteOldResults");
-  var movies = $(".movieDescription");
-  movies.remove();
+  var titles = $(".movieDescription");
+  titles.remove();
 }
 
 
@@ -90,8 +90,9 @@ function ajaxMovieResults(data) {
     var orTitle = res.original_title;
     var language = res.original_language;
     var vote = res.vote_average;
+    var posterPath = res.poster_path;
 
-    addMovieTitle(title, orTitle, language, vote);
+    addMovieTitle(title, orTitle, language, vote, posterPath);
   }
 }
 
@@ -106,19 +107,21 @@ function ajaxTvSeriesResults(data) {
     var orTitle = res.original_name;
     var language = res.original_language;
     var vote = res.vote_average;
+    var posterPath = res.poster_path;
 
-    addTvSeriesTitle(title, orTitle, language, vote);
+    addTvSeriesTitle(title, orTitle, language, vote, posterPath);
   }
 }
 
-function addMovieTitle(title, orTitle, language, vote) { //funz. che stampa in ".movies"
+function addMovieTitle(title, orTitle, language, vote, posterPath) { //funz. che stampa in ".movies"
 
   var tempData = {                                      //array di dati che sostituiranno i marks del template
 
     title: title,
     orTitle: orTitle,
     language: getLanguageFlag(language),
-    vote: ratingStar(vote)
+    vote: ratingStar(vote),
+    posterSrc: getPoster(posterPath)
   }
 
   var template = $("#movieTemplate").html();            //var. che legge l'html di "#movieTemplate"
@@ -128,14 +131,15 @@ function addMovieTitle(title, orTitle, language, vote) { //funz. che stampa in "
   $(".movies").append(movieDescription);
 }
 
-function addTvSeriesTitle(title, orTitle, language, vote) { //funz. che stampa in ".movies"
+function addTvSeriesTitle(title, orTitle, language, vote, posterPath) { //funz. che stampa in ".tvSeries"
 
-  var tempData = {                                      //array di dati che sostituiranno i marks del template
+  var tempData = {                                                  //array di dati che sostituiranno i marks del template
 
     title: title,
     orTitle: orTitle,
     language: getLanguageFlag(language),
-    vote: ratingStar(vote)
+    vote: ratingStar(vote),
+    posterSrc: getPoster(posterPath)
   }
 
   var template = $("#movieTemplate").html();            //var. che legge l'html di "#movieTemplate"
@@ -143,6 +147,20 @@ function addTvSeriesTitle(title, orTitle, language, vote) { //funz. che stampa i
   var movieDescription = compiled(tempData);            //scrive nel template i dati posti ad inizio funz.
 
   $(".tvSeries").append(movieDescription);
+}
+
+function getPoster(posterPath){                         //funz. che contiene "res.poster_path"
+
+  var posterSrc = "https://image.tmdb.org/t/p/w185";    //var. che contiene l'url "fisso" per ottenere l'immagine
+  if (posterPath == null) {                             //se "posterPath" è "null"
+
+    posterSrc = "img/noPoster.jpg";                     //la var. che conteneva l'url fisso viene sostituito da una mia immagine
+  }else{                                                //altrimenti
+
+    posterSrc += posterPath;                            // aggiungi all'url fisso "posterPath"
+  }
+
+  return posterSrc;                                     //ritorna l'url completo
 }
 
 function getLanguageFlag(lang){
