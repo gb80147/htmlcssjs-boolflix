@@ -24,25 +24,31 @@
           <b>Titolo originale:</b>{{ orTitle }}
         </div>
         <div>
-          <b>Lingua:</b>{{ language }}
+          <b>Lingua:</b>{{{ language }}}
         </div>
         <div>
-          <b>Voto:</b>{{ vote }}
+          <b>Voto:</b>{{{ vote }}}
         </div>
       </div>
      </script>
      <!-- JS: MY JS -->
      <script type="text/javascript" src="script.js"></script>
-     <title>Bootflix</title>
+     <title>Boolflix</title>
    </head>
    <body>
     <header>
       <h1>BOOLFLIX</h1>
+      <div class="">
+        <input id="search" type="text" name="" value="">
+        <button type="button" name="Cerca">Cerca</button>
+      </div>
     </header>
     <div class="container">
-      <input id="search" type="text" name="" value="">
-      <button type="button" name="Cerca">Cerca</button>
       <div class="movies">
+        movies
+      </div>
+      <div class="tvSeries">
+        tvserie
       </div>
     </div>
    </body>

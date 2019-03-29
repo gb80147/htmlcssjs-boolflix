@@ -8,12 +8,44 @@
 header{
   background: black;
   color: red;
-  height: 80px;
+  height: 60px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.container{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+.movies{
+  width: 50%;
+  height: 100%;
+  background: brown;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+.tvSeries{
+  width: 50%;
+  height: 100%;
+  background: darkcyan;
+  padding: 10px;
+  overflow-y: scroll;
 }
 
 .movieDescription{
   margin-bottom: 10px;
+}
+
+.movieDescription .fa-star{
+  color: #f2ea00;
+}
+
+.flag{
+  height: 13px;
+  margin-left: 5px;
 }
