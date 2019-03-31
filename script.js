@@ -10,7 +10,7 @@ function enterSearch(e) {                                //la funzione passa la 
 function deleteOldResults() {                            //funz. che elimina i risultati delle ricerche precedenti
 
   console.log("deleteOldResults");
-  var titles = $(".movieDescription");
+  var titles = $(".movieContainer");
   titles.remove();
 }
 
@@ -91,8 +91,9 @@ function ajaxMovieResults(data) {
     var language = res.original_language;
     var vote = res.vote_average;
     var posterPath = res.poster_path;
+    var overview = res.overview;
 
-    addMovieTitle(title, orTitle, language, vote, posterPath);
+    addMovieTitle(title, orTitle, language, vote, posterPath, overview);
   }
 }
 
@@ -108,12 +109,13 @@ function ajaxTvSeriesResults(data) {
     var language = res.original_language;
     var vote = res.vote_average;
     var posterPath = res.poster_path;
+    var overview = res.overview;
 
-    addTvSeriesTitle(title, orTitle, language, vote, posterPath);
+    addTvSeriesTitle(title, orTitle, language, vote, posterPath, overview);
   }
 }
 
-function addMovieTitle(title, orTitle, language, vote, posterPath) { //funz. che stampa in ".movies"
+function addMovieTitle(title, orTitle, language, vote, posterPath, overview) { //funz. che stampa in ".movies .wrapper"
 
   var tempData = {                                      //array di dati che sostituiranno i marks del template
 
@@ -121,17 +123,18 @@ function addMovieTitle(title, orTitle, language, vote, posterPath) { //funz. che
     orTitle: orTitle,
     language: getLanguageFlag(language),
     vote: ratingStar(vote),
-    posterSrc: getPoster(posterPath)
+    posterSrc: getPoster(posterPath),
+    overview: overview
   }
 
   var template = $("#movieTemplate").html();            //var. che legge l'html di "#movieTemplate"
   var compiled = Handlebars.compile(template);          //handlebars compila il template creato
-  var movieDescription = compiled(tempData);            //scrive nel template i dati posti ad inizio funz.
+  var movieContainer = compiled(tempData);            //scrive nel template i dati posti ad inizio funz.
 
-  $(".movies").append(movieDescription);
+  $(".movies .wrapper").append(movieContainer);
 }
 
-function addTvSeriesTitle(title, orTitle, language, vote, posterPath) { //funz. che stampa in ".tvSeries"
+function addTvSeriesTitle(title, orTitle, language, vote, posterPath, overview) { //funz. che stampa in ".tvSeries .wrapper"
 
   var tempData = {                                                  //array di dati che sostituiranno i marks del template
 
@@ -139,14 +142,15 @@ function addTvSeriesTitle(title, orTitle, language, vote, posterPath) { //funz. 
     orTitle: orTitle,
     language: getLanguageFlag(language),
     vote: ratingStar(vote),
-    posterSrc: getPoster(posterPath)
+    posterSrc: getPoster(posterPath),
+    overview: overview
   }
 
   var template = $("#movieTemplate").html();            //var. che legge l'html di "#movieTemplate"
   var compiled = Handlebars.compile(template);          //handlebars compila il template creato
-  var movieDescription = compiled(tempData);            //scrive nel template i dati posti ad inizio funz.
+  var movieContainer = compiled(tempData);            //scrive nel template i dati posti ad inizio funz.
 
-  $(".tvSeries").append(movieDescription);
+  $(".tvSeries .wrapper").append(movieContainer);
 }
 
 function getPoster(posterPath){                         //funz. che contiene "res.poster_path"
@@ -221,7 +225,7 @@ function init() {
 
   $("#search").keyup(enterSearch);                    //premendo invio parte la funzione "enterSearch"
 
-  $("button").click(transferResearchToAjax);          //cliccando il tasto "cerca" parte la funzione "transferResearchToAjax"
+  $("a").click(transferResearchToAjax);               //cliccando il tasto "cerca" parte la funzione "transferResearchToAjax"
 }
 
 $(document).ready(init);

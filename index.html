@@ -16,21 +16,32 @@
      <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js" charset="utf-8"></script>
      <!-- JS: MY TEMPLATE -->
      <script id="movieTemplate" type="text/x-handlebars-template">
-      <div class="movieDescription">
+      <div class="movieContainer">
         <div>
-         <img src="{{ posterSrc }}" alt="">
-        </div>
-        <div>
-          <b>Titolo:</b>{{ title }}
-        </div>
-        <div>
-          <b>Titolo originale:</b>{{ orTitle }}
-        </div>
-        <div>
-          <b>Lingua:</b>{{{ language }}}
-        </div>
-        <div>
-          <b>Voto:</b>{{{ vote }}}
+          <img class="poster"src="{{ posterSrc }}" alt="">
+          <div class="movieDescription">
+            <div class="title">
+              {{ title }}
+            </div>
+            <div class="otherDescription">
+              <div>
+                <b>Titolo originale:</b>
+                <span>{{ orTitle }}</span>
+              </div>
+              <div>
+                <b>Lingua:</b>
+                <span>{{{ language }}}</span>
+              </div>
+              <div>
+                <b>Voto:</b>
+                <span>{{{ vote }}}</span>
+              </div>
+              <div>
+                <b>Descrizione:</b>
+                <span>{{{ overview }}}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
      </script>
@@ -40,18 +51,43 @@
    </head>
    <body>
     <header>
-      <h1>BOOLFLIX</h1>
-      <div class="">
-        <input id="search" type="text" name="" value="">
-        <button type="button" name="Cerca">Cerca</button>
+      <div class="navLeft">
+        <img id="logo" src="img/logo.png" alt="">
+        <div>
+          <span>
+            Home
+          </span>
+          <span>
+            Serie
+          </span>
+          <span>
+            Film
+          </span>
+          <span>
+            Aggiunti di recente
+          </span>
+          <span>
+            La mia lista
+          </span>
+        </div>
+      </div>
+      <div class="search">
+        <input id="search" type="text" placeholder="Cerca film o serie tv">
+        <a href="#"><i class="fas fa-search"></i></a>
       </div>
     </header>
-    <div class="container">
-      <div class="movies">
-        movies
+    <div class="containerResults">
+      <h1>Film</h1>
+      <div class="movies box">
+        <div class="wrapper">
+
+        </div>
       </div>
-      <div class="tvSeries">
-        tvserie
+      <h1>Serie tv</h1>
+      <div class="tvSeries box">
+        <div class="wrapper">
+
+        </div>
       </div>
     </div>
    </body>
